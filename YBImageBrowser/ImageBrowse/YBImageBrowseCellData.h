@@ -90,6 +90,8 @@ When the image exceeds this texture size, it will be compressed asynchronously a
  If the image decoding lead to interactive caton, you can set it to YES. When decoding asynchronously, there will be more time consumption. */
 @property (nonatomic, class) BOOL shouldDecodeAsynchronously;
 
+@property (nonatomic, assign) CGFloat progressRadius;
+@property (nonatomic, strong) YBImage *loadFailedImage;
 @end
 
 NS_ASSUME_NONNULL_END

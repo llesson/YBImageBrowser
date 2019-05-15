@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) YBImageBrowserProgressView *yb_progressView;
 
+@property (nonatomic, assign) CGFloat yb_progressRadius;
+
 @end
 
 @interface YBImageBrowserProgressView : UIView
@@ -33,6 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showLoading;
 
 - (void)showText:(NSString *)text click:(void(^)(void))click;
+
+//进度条的宽度
+@property (nonatomic, assign) CGFloat progressRadius;
 
 @end
 

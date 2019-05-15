@@ -31,6 +31,7 @@
     YBImageBrowserProgressView *progressView = self.yb_progressView;
     if (!progressView) {
         progressView = [YBImageBrowserProgressView new];
+        progressView.progressRadius = self.yb_progressRadius;
         self.yb_progressView = progressView;
     }
     
@@ -60,17 +61,26 @@
     return objc_getAssociatedObject(self, "YBImageBrowserProgressView");
 }
 
+- (void)setYb_progressRadius:(CGFloat)yb_progressRadius {
+    objc_setAssociatedObject(self, _cmd, @(yb_progressRadius), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CGFloat)yb_progressRadius {
+    return [objc_getAssociatedObject(self, @selector(setYb_progressRadius:)) doubleValue];
+}
+
 @end
 
 
 @interface YBImageBrowserProgressDrawView : UIView
 @property (nonatomic, assign) CGFloat progress;
+@property (nonatomic, assign) CGFloat progressRadius;
 @end
 @implementation YBImageBrowserProgressDrawView
 - (void)drawRect:(CGRect)rect {
     if (self.isHidden) return;
     
-    CGFloat radius = 17;
+    CGFloat radius = self.progressRadius;
     CGFloat strokeWidth = 3;
     CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
     
@@ -92,6 +102,11 @@
     NSMutableAttributedString *atts = [[NSMutableAttributedString alloc] initWithString:string attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:10], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     CGSize size = atts.size;
     [atts drawAtPoint:CGPointMake(center.x - size.width / 2.0, center.y - size.height / 2.0)];
+}
+
+- (CGSize)intrinsicContentSize {
+    CGFloat wh = (self.progressRadius + 3) * 2;
+    return CGSizeMake(wh, wh);
 }
 @end
 
@@ -124,6 +139,8 @@ typedef NS_ENUM(NSUInteger, YBImageBrowserProgressType) {
         [self addSubview:self.drawView];
         [self addSubview:self.textLabel];
         [self addSubview:self.imageView];
+        
+        self.drawView.progressRadius = 17.f;
     }
     return self;
 }
@@ -141,15 +158,19 @@ typedef NS_ENUM(NSUInteger, YBImageBrowserProgressType) {
     self.drawView.translatesAutoresizingMaskIntoConstraints = NO;
     NSLayoutConstraint *layG = [NSLayoutConstraint constraintWithItem:self.drawView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     NSLayoutConstraint *layH = [NSLayoutConstraint constraintWithItem:self.drawView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-    NSLayoutConstraint *layI = [NSLayoutConstraint constraintWithItem:self.drawView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50];
-    NSLayoutConstraint *layJ = [NSLayoutConstraint constraintWithItem:self.drawView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50];
+//    NSLayoutConstraint *layI = [NSLayoutConstraint constraintWithItem:self.drawView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50];
+//    NSLayoutConstraint *layJ = [NSLayoutConstraint constraintWithItem:self.drawView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:50];
     
-    [self addConstraints:@[layA, layB, layC, layE, layF, layG, layH, layI, layJ]];
+    [self addConstraints:@[layA, layB, layC, layE, layF, layG, layH]];
     [super updateConstraints];
 }
 
 #pragma mark public
-
+- (void)setProgressRadius:(CGFloat)progressRadius{
+    _progressRadius = progressRadius;
+    
+    _drawView.progressRadius = progressRadius;
+}
 - (void)showProgress:(CGFloat)progress {
     self.userInteractionEnabled = NO;
     _type = YBImageBrowserProgressTypeProgress;

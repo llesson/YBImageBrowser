@@ -373,6 +373,7 @@
 - (void)cellDataStateChanged {
     YBImageBrowseCellData *data = self.cellData;
     YBImageBrowseCellDataState dataState = data.dataState;
+    self.contentView.yb_progressRadius = data.progressRadius;
     switch (dataState) {
         case YBImageBrowseCellDataStateInvalid: {
             [self.contentView yb_showProgressViewWithText:[YBIBCopywriter shareCopywriter].imageIsInvalid click:nil];
@@ -443,7 +444,13 @@
         }
             break;
         case YBImageBrowseCellDataStateDownloadFailed: {
-            [self.contentView yb_showProgressViewWithText:[YBIBCopywriter shareCopywriter].downloadImageFailed click:nil];
+            if (data.loadFailedImage) {
+                [self.contentView yb_hideProgressView];
+                self.mainImageView.image = data.loadFailedImage;
+                [self updateMainContentViewLayoutWithContainerSize:_containerSize fillType:[data getFillTypeWithLayoutDirection:_layoutDirection]];
+            } else {
+                [self.contentView yb_showProgressViewWithText:[YBIBCopywriter shareCopywriter].downloadImageFailed click:nil];
+            }
         }
             break;
         default:
@@ -461,6 +468,8 @@
         imageSize = self.cellData.image.size;
     } else if (self.cellData.thumbImage) {
         imageSize = self.cellData.thumbImage.size;
+    } else if (self.cellData.loadFailedImage) {
+        imageSize = self.cellData.loadFailedImage.size;
     } else {
         return;
     }
