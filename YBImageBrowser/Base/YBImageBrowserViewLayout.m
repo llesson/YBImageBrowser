@@ -27,7 +27,8 @@
 }
 
 - (BOOL)flipsHorizontallyInOppositeLayoutDirection {
-    return self.isArabic;
+    //return self.isArabic;
+    return YES;
 }
 
 - (void)prepareLayout {
