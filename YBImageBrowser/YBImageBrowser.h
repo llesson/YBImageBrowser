@@ -29,8 +29,6 @@ typedef NS_ENUM(NSInteger, YBImageBrowserTransitionType) {
 
 @interface YBImageBrowser : UIViewController
 
-- (instancetype)initWithIsArabic:(BOOL)isArabic;
-
 /** Usually, use this array to configure data sources. Array elements can be 'YBImageBrowseCellData', 'YBVideoBrowseCellData'. */
 @property (nonatomic, copy) NSArray<id<YBImageBrowserCellDataProtocol>> *dataSourceArray;
 
@@ -64,6 +62,8 @@ typedef NS_ENUM(NSInteger, YBImageBrowserTransitionType) {
  Refresh display, you need to ensure that the data source is changed correctly.
  */
 - (void)reloadData;
+
++ (void)setArabic:(BOOL)isArabic;
 
 /**
  Get current data of image browser.

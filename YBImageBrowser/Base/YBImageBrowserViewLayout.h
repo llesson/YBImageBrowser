@@ -10,8 +10,6 @@
 
 @interface YBImageBrowserViewLayout : UICollectionViewFlowLayout
 
-- (instancetype)initWithIsArabic:(BOOL)isArabic;
-
 @property (nonatomic, assign) CGFloat distanceBetweenPages;
 @end
 

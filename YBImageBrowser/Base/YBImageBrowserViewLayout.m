@@ -7,19 +7,16 @@
 //
 
 #import "YBImageBrowserViewLayout.h"
+#import "YBImageBrowerRTLSuport.h"
 
 @interface YBImageBrowserViewLayout ()
-
-/* 是否是阿拉伯语系，会影响到collection的布局 */
-@property (nonatomic, assign) BOOL isArabic;
 
 @end
 
 @implementation YBImageBrowserViewLayout
 
-- (instancetype)initWithIsArabic:(BOOL)isArabic {
+- (instancetype)init {
     self = [super init];
-    self.isArabic = isArabic;
     if (self) {
         self.distanceBetweenPages = 20;
     }
@@ -27,8 +24,7 @@
 }
 
 - (BOOL)flipsHorizontallyInOppositeLayoutDirection {
-    //return self.isArabic;
-    return YES;
+    return [YBImageBrowerRTLSuport isArabic];
 }
 
 - (void)prepareLayout {

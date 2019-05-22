@@ -31,8 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YBImageBrowserView : UICollectionView
 
-- (instancetype)initWithIsArabic:(BOOL)isArabic;
-
 @property (nonatomic, weak) id<YBImageBrowserDataSource> yb_dataSource;
 
 @property (nonatomic, weak) YBImageBrowser<YBImageBrowserViewDelegate> *yb_delegate;

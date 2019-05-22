@@ -15,7 +15,7 @@
 #import "YBIBTransitionManager.h"
 #import "YBIBLayoutDirectionManager.h"
 #import "YBIBCopywriter.h"
-
+#import "YBImageBrowerRTLSuport.h"
 
 @interface YBImageBrowser () <UIViewControllerTransitioningDelegate, YBImageBrowserViewDelegate, YBImageBrowserDataSource> {
     BOOL _isFirstViewDidAppear;
@@ -27,11 +27,13 @@
 }
 @property (nonatomic, strong) YBIBLayoutDirectionManager *layoutDirectionManager;
 @property (nonatomic, strong) YBIBTransitionManager *transitionManager;
-/* 是否是阿拉伯语系，会影响到collection的布局 */
-@property (nonatomic, assign) BOOL isArabic;
 @end
 
 @implementation YBImageBrowser
+
++ (void)setArabic:(BOOL)isArabic {
+    YBImageBrowerRTLSuport.isArabic = isArabic;
+}
 
 #pragma mark - life cycle
 
@@ -42,9 +44,8 @@
     [self removeObserverForSystem];
 }
 
-- (instancetype)initWithIsArabic:(BOOL)isArabic {
+- (instancetype)init {
     self = [super init];
-    self.isArabic = isArabic;
     if (self) {
         self.transitioningDelegate = self;
         self.modalPresentationStyle = UIModalPresentationCustom;
@@ -409,7 +410,7 @@
 
 - (YBImageBrowserView *)browserView {
     if (!_browserView) {
-        _browserView = [[YBImageBrowserView alloc] initWithIsArabic:self.isArabic];
+        _browserView = [YBImageBrowserView new];
         _browserView.yb_delegate = self;
         _browserView.yb_dataSource = self;
         _browserView.giProfile = [YBIBGestureInteractionProfile new];
