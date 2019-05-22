@@ -24,7 +24,7 @@
 }
 
 - (BOOL)flipsHorizontallyInOppositeLayoutDirection {
-    return [YBImageBrowerRTLSuport isArabic];
+    return [YBImageBrowerRTLSuport shareInstance].isArabic;
 }
 
 - (void)prepareLayout {

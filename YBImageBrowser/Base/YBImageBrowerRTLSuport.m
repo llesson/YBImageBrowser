@@ -7,7 +7,14 @@
 //
 
 #import "YBImageBrowerRTLSuport.h"
-
 @implementation YBImageBrowerRTLSuport
 
++ (instancetype)shareInstance {
+    static YBImageBrowerRTLSuport *instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [[self alloc] init];
+    });
+    return instance;
+}
 @end

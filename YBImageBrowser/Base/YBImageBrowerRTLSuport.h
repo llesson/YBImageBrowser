@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YBImageBrowerRTLSuport : NSObject
 
-@property (nonatomic, assign, class) BOOL isArabic; ///是否是阿拉伯rtl布局
++ (instancetype)shareInstance;
+
+@property (nonatomic, assign) BOOL isArabic; ///是否是阿拉伯rtl布局
 
 @end
 

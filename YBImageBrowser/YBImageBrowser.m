@@ -32,7 +32,7 @@
 @implementation YBImageBrowser
 
 + (void)setArabic:(BOOL)isArabic {
-    YBImageBrowerRTLSuport.isArabic = isArabic;
+    [YBImageBrowerRTLSuport shareInstance].isArabic = isArabic;
 }
 
 #pragma mark - life cycle
