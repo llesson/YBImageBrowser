@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, YBImageBrowserTransitionType) {
 
 @interface YBImageBrowser : UIViewController
 
+- (instancetype)initWithIsArabic:(BOOL)isArabic;
+
 /** Usually, use this array to configure data sources. Array elements can be 'YBImageBrowseCellData', 'YBVideoBrowseCellData'. */
 @property (nonatomic, copy) NSArray<id<YBImageBrowserCellDataProtocol>> *dataSourceArray;
 
@@ -122,9 +124,6 @@ typedef NS_ENUM(NSInteger, YBImageBrowserTransitionType) {
 /** The number of data cache limits, the default is 8. (The default is 1 which low memory device.)
  It is effective when using the proxy to configure data sources. If the data cache is overmuch, may lead to excessive memory consumption. */
 @property (nonatomic, assign) NSUInteger dataCacheCountLimit;
-
-/* 是否是阿拉伯语系，会影响到collection的布局 */
-@property (nonatomic, assign) BOOL isArabic;
 
 @end
 

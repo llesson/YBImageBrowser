@@ -27,6 +27,8 @@
 }
 @property (nonatomic, strong) YBIBLayoutDirectionManager *layoutDirectionManager;
 @property (nonatomic, strong) YBIBTransitionManager *transitionManager;
+/* 是否是阿拉伯语系，会影响到collection的布局 */
+@property (nonatomic, assign) BOOL isArabic;
 @end
 
 @implementation YBImageBrowser
@@ -40,8 +42,9 @@
     [self removeObserverForSystem];
 }
 
-- (instancetype)init {
+- (instancetype)initWithIsArabic:(BOOL)isArabic {
     self = [super init];
+    self.isArabic = isArabic;
     if (self) {
         self.transitioningDelegate = self;
         self.modalPresentationStyle = UIModalPresentationCustom;
