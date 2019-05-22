@@ -406,7 +406,7 @@
 
 - (YBImageBrowserView *)browserView {
     if (!_browserView) {
-        _browserView = [YBImageBrowserView new];
+        _browserView = [[YBImageBrowserView alloc] initWithIsArabic:self.isArabic];
         _browserView.yb_delegate = self;
         _browserView.yb_dataSource = self;
         _browserView.giProfile = [YBIBGestureInteractionProfile new];

@@ -22,6 +22,10 @@
     return self;
 }
 
+- (BOOL)flipsHorizontallyInOppositeLayoutDirection {
+    return self.isArabic;
+}
+
 - (void)prepareLayout {
     [super prepareLayout];
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;

@@ -39,6 +39,12 @@ static NSInteger const preloadCount = 2;
     return [self initWithFrame:frame collectionViewLayout:[YBImageBrowserViewLayout new]];
 }
 
+- (instancetype)initWithIsArabic:(BOOL)isArabic {
+    YBImageBrowserViewLayout *layout = [[YBImageBrowserViewLayout alloc] init];
+    layout.isArabic = isArabic;
+    return [self initWithFrame:CGRectZero collectionViewLayout:layout];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(nonnull UICollectionViewLayout *)layout {
     self = [super initWithFrame:frame collectionViewLayout:layout];
     if (self) {

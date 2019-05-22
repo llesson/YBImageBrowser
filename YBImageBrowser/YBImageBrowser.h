@@ -123,6 +123,9 @@ typedef NS_ENUM(NSInteger, YBImageBrowserTransitionType) {
  It is effective when using the proxy to configure data sources. If the data cache is overmuch, may lead to excessive memory consumption. */
 @property (nonatomic, assign) NSUInteger dataCacheCountLimit;
 
+/* 是否是阿拉伯语系，会影响到collection的布局 */
+@property (nonatomic, assign) BOOL isArabic;
+
 @end
 
 NS_ASSUME_NONNULL_END
