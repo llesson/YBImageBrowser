@@ -40,8 +40,7 @@ static NSInteger const preloadCount = 2;
 }
 
 - (instancetype)initWithIsArabic:(BOOL)isArabic {
-    YBImageBrowserViewLayout *layout = [[YBImageBrowserViewLayout alloc] init];
-    layout.isArabic = isArabic;
+    YBImageBrowserViewLayout *layout = [[YBImageBrowserViewLayout alloc] initWithIsArabic:isArabic];
     return [self initWithFrame:CGRectZero collectionViewLayout:layout];
 }
 

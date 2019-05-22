@@ -10,12 +10,16 @@
 
 @interface YBImageBrowserViewLayout ()
 
+/* 是否是阿拉伯语系，会影响到collection的布局 */
+@property (nonatomic, assign) BOOL isArabic;
+
 @end
 
 @implementation YBImageBrowserViewLayout
 
-- (instancetype)init {
+- (instancetype)initWithIsArabic:(BOOL)isArabic {
     self = [super init];
+    self.isArabic = isArabic;
     if (self) {
         self.distanceBetweenPages = 20;
     }
